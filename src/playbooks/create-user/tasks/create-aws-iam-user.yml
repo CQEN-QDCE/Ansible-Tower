@@ -1,0 +1,13 @@
+---   
+- name: create IAM user 
+  iam: 
+    iam_type: user 
+    name: "{{ username }}"
+    password: "{{ password }}"
+    access_key_state: create
+    state: present 
+    groups: 
+      - grAssumeRoleAdmin
+      - grFullAdmin
+    register: credentials
+- debug: var=credentials
