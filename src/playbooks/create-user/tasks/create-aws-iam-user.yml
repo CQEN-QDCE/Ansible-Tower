@@ -9,5 +9,5 @@
     groups: 
       - grAssumeRoleAdmin
       - grFullAdmin
-    register: credentials
+  register: credentials
 - debug: var=credentials
