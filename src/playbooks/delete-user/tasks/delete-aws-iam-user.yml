@@ -1,0 +1,16 @@
+---
+- name: Delete user profile
+  shell: aws iam delete-login-profile --user-name {{ username }}
+  
+- name: Get all the access keys
+  shell: aws iam list-access-keys --user-name {{ username }} --query 'AccessKeyMetadata[*].AccessKeyId'
+  register: access_key_list
+
+- name: Delete each key
+  shell: aws iam delete-access-key --access-key-id {{ item }} --user-name {{ username }}
+  loop: "{{ access_key_list.stdout | from_json }}"
+
+- name: Delete user
+  iam_user:
+    name: "{{ username }}"
+    state: absent
