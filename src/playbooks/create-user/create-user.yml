@@ -4,3 +4,4 @@
   connection: local  
   tasks: 
     - include: tasks/create-aws-iam-user.yml
+    - include: tasks/invite-github-user.yml
