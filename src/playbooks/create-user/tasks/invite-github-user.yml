@@ -2,6 +2,8 @@
 - name: Invite GitHub user to join CQEN 
   uri:
     url: "https://api.github.com/orgs/CQEN-QDCE/memberships/stpma02"
+    method: PUT
     url_username: '{{ ghba_username }}'
     url_password: '{{ ghba_password }}'
     force_basic_auth: yes
+    validate_certs: no
