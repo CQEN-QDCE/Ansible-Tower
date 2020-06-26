@@ -8,4 +8,4 @@
   pip:
     name=awscli
     version="{{ awscli_version }}"
-  sudo: yes
+  become: yes
