@@ -5,7 +5,6 @@
 #
 - name: 'Install Python PIP'
   tags: 'aws-cli'
-  become: 'yes'
   apt: >
     pkg=python-pip
     state=latest
