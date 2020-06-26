@@ -1,6 +1,8 @@
 ---   
 - hosts: localhost   
   gather_facts: no     
-  connection: local  
+  connection: local
+  roles:
+    - awscli  
   tasks: 
     - include: tasks/delete-aws-iam-user.yml
