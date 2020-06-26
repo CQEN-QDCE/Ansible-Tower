@@ -8,4 +8,4 @@
   pip:
     name=awscli
     version="{{ awscli_version }}"
-  become: yes
+#  become: yes
