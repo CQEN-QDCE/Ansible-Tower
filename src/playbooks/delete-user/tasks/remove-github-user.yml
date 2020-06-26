@@ -1,0 +1,9 @@
+---   
+- name: Remove GitHub user from CQEN 
+  uri:
+    url: https://api.github.com/orgs/CQEN-QDCE/memberships/{{ github_username }}
+    method: DELETE
+    url_username: '{{ ghba_username }}'
+    url_password: '{{ ghba_password }}'
+    force_basic_auth: yes
+    validate_certs: no

@@ -2,7 +2,6 @@
 - hosts: localhost   
   gather_facts: no     
   connection: local
-#  roles:
-#    - awscli  
   tasks: 
     - include: tasks/delete-aws-iam-user.yml
+    - include: tasks/remove-github-user.yml
