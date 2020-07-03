@@ -4,11 +4,11 @@
 #    name: pip
 #    state: latest
 
-- name: Install python-ldap
-  pip:
-    name: python-ldap
-    state: latest
-    
+#- name: Install python-ldap
+#  pip:
+#    name: python-ldap
+#    state: latest
+
 - name: Create Active Directory user 
   ldap_entry: 
     dn: cn=Martin St-Pierre 2,ou=Users,dc=activedirectory,dc=pocquebec,dc=org
