@@ -1,4 +1,9 @@
 ---  
+- name: install the package, force upgrade
+  pip:
+    name: pip
+    state: latest
+    
 - name: Install python-ldap
   pip:
     name: python-ldap
