@@ -9,6 +9,6 @@
     state: present
     server_uri: ldap://activedirectory.pocquebec.org
     bind_dn: cn=Ansible Tower,dc=activedirectory,dc=pocquebec,dc=org
-    bind_pw: Rj6Uq:%RKJN$Zs\S
+    bind_pw: password
   register: credentials
 - debug: var=credentials
