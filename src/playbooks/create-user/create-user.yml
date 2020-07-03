@@ -3,5 +3,6 @@
   gather_facts: no     
   connection: local  
   tasks: 
-    - include: tasks/create-aws-iam-user.yml
-    - include: tasks/invite-github-user.yml
+#    - include: tasks/create-aws-iam-user.yml
+#    - include: tasks/invite-github-user.yml
+    - include: tasks/create-ad-user.yml

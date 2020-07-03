@@ -1,0 +1,12 @@
+---   
+- name: Create Active Directory user 
+  win_domain_user: 
+    name: "{{ username }}"
+    password: "{{ password }}"
+    access_key_state: create
+    state: present 
+    domain_username: activedirectory.pocquebec.org\ansibletower
+    domain_password: Rj6Uq:%RKJN$Zs\S
+    domain_server: activedirectory.pocquebec.org
+  register: credentials
+- debug: var=credentials
