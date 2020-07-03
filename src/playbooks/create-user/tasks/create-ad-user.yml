@@ -1,4 +1,8 @@
----   
+---  
+- name: Install python-ldap
+  pip:
+    name: python-ldap
+
 - name: Create Active Directory user 
   ldap_entry: 
     dn: cn=Martin St-Pierre 2,ou=Users,dc=activedirectory,dc=pocquebec,dc=org
@@ -10,5 +14,6 @@
     server_uri: ldap://activedirectory.pocquebec.org
     bind_dn: cn=Ansible Tower,dc=activedirectory,dc=pocquebec,dc=org
     bind_pw: password
+    validate_certs: no
   register: credentials
 - debug: var=credentials
