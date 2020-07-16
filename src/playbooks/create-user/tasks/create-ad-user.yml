@@ -8,7 +8,7 @@
       sn: St-Pierre2
     state: present
     server_uri: ldap://activedirectory.pocquebec.org
-    bind_dn: cn=Ansible Tower,dc=activedirectory,dc=pocquebec,dc=org
+    bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     bind_pw: '{{ ldap_password }}'
     validate_certs: no
   register: credentials
