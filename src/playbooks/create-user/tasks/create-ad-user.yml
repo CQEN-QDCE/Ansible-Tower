@@ -1,7 +1,7 @@
 ---  
 - name: Create Active Directory user 
   ldap_entry: 
-    dn: cn=Martin St-Pierre 2,ou=Users,dc=activedirectory,dc=pocquebec,dc=org
+    dn: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     objectClass:
       - person
     attributes:
