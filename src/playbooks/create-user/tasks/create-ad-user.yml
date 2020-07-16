@@ -1,15 +1,25 @@
 ---  
 - name: Create Active Directory user 
-  ldap_entry: 
-    dn: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
-    objectClass:
-      - person
-    attributes:
-      sn: St-Pierre2
+#  ldap_entry: 
+#    dn: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+#    objectClass:
+#      - person
+#    attributes:
+#      sn: St-Pierre2
+#    state: present
+#    server_uri: ldap://activedirectory.pocquebec.org
+#    bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+#    bind_pw: '{{ ldap_password }}'
+#    validate_certs: no
+#  register: credentials
+#- debug: var=credentials
+
+  win_domain_user:
+    name: bob
+    firstname: Bob
+    surname: Smith
+    password: B0bP4ssw0rd
     state: present
-    server_uri: ldap://activedirectory.pocquebec.org
-    bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
-    bind_pw: '{{ ldap_password }}'
-    validate_certs: no
-  register: credentials
-- debug: var=credentials
+    path: OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    domain_username: activedirectory.pocquebec.org\ansibletower
+    domain_password: '{{ ldap_password }}'
