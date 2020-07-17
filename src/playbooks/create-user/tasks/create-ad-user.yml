@@ -22,6 +22,8 @@
     validate_certs: no
   register: credentials
 - debug: var=credentials
+- pause:
+    seconds: 5
 - name: Add attribut 
   ldap_attr:
     dn: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
