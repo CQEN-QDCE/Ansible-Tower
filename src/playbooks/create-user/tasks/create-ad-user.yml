@@ -1,5 +1,5 @@
 ---  
-- name: Create Active Directory user 
+- name: Create user in Active Directory
   ldap_entry: 
     dn: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
     objectClass:
@@ -24,15 +24,13 @@
 - debug: var=credentials
 - pause:
     seconds: 5
-- name: Add attribut 
+- name: Add user to group 
   ldap_attr:
     dn: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
-    name: "{{ item.key }}"
-    values: "{{ item.value }}"
+    name: member
+    values: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
     state: present
     server_uri: ldaps://activedirectory.pocquebec.org
     bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     bind_pw: '{{ ldap_password }}'
     validate_certs: no
-  with_dict:
-    member: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
