@@ -10,17 +10,11 @@
     attributes:
       sn: St-Pierre3
       displayName: Martin St-Pierre 3
-      badPwdCount: 0
-      codePage: 0 
-      countryCode: 0
       distinguishedName: CN=Martin St-Pierre 3,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
       givenName: Martin
-      logonCount: 0
       mail: martin.st-pierre3@sct.gouv.qc.ca
       memberOf: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
       sAMAccountName: stpm03
-      sAMAccountType: 805306368
-      userAccountControl: 0x200
       userPrincipalName: stpm03@activedirectory.pocquebec.org
     state: present
     server_uri: ldaps://activedirectory.pocquebec.org
