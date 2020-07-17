@@ -22,3 +22,15 @@
     validate_certs: no
   register: credentials
 - debug: var=credentials
+- name: Add attribut 
+  ldap_attr:
+    dn: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
+    state: exact
+    server_uri: ldaps://activedirectory.pocquebec.org
+    bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    bind_pw: '{{ ldap_password }}'
+    validate_certs: no
+  with_dict:
+    memberOf: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
