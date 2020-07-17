@@ -7,7 +7,7 @@
     attributes:
       sn: St-Pierre2
     state: present
-    server_uri: ldap://activedirectory.pocquebec.org
+    server_uri: ldaps://activedirectory.pocquebec.org
     bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     bind_pw: '{{ ldap_password }}'
     validate_certs: no
@@ -19,7 +19,7 @@
     name: "{{ item.key }}"
     values: "{{ item.value }}"
     state: exact
-    server_uri: ldap://activedirectory.pocquebec.org
+    server_uri: ldaps://activedirectory.pocquebec.org
     bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     bind_pw: '{{ ldap_password }}'
     validate_certs: no
