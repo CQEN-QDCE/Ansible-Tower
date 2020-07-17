@@ -13,6 +13,7 @@
     validate_certs: no
   register: credentials
 - debug: var=credentials
+- name: Add attribut 
   ldap_attr:
     dn: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     name: displayName
