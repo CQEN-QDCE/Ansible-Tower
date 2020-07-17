@@ -16,10 +16,25 @@
 - name: Add attribut 
   ldap_attr:
     dn: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
-    name: displayName
-    values: Martin St-Pierre 2
+    name: "{{ item.key }}"
+    values: "{{ item.value }}"
     state: exact
     server_uri: ldap://activedirectory.pocquebec.org
     bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     bind_pw: '{{ ldap_password }}'
     validate_certs: no
+  with_dict:
+    displayName: Martin St-Pierre 2
+    badPwdCount: 0
+    codePage: 0 
+    countryCode: 0
+    distinguishedName: CN=Martin St-Pierre 2,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    givenName: Martin
+    logonCount: 0
+    mail: martin.st-pierre2@sct.gouv.qc.ca
+    memberOf: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
+    objectClass: top; person; organizationalPerson; user
+    sAMAccountName: stpm02
+    sAMAccountType: 805306368 = ( NORMAL_USER_ACCOUNT )
+    userAccountControl: 0x200 = ( NORMAL_ACCOUNT );
+    userPrincipalName: stpm02@activedirectory.pocquebec.org
