@@ -12,7 +12,7 @@
       displayName: '{{ first_name }} {{ last_name }}'
       distinguishedName: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
       givenName: '{{ first_name }}'
-      mail: martin.st-pierre3@sct.gouv.qc.ca
+      mail: '{{ email }}'
       sAMAccountName: '{{ username }}'
       userPrincipalName: '{{ username }}@activedirectory.pocquebec.org'
     state: present
@@ -23,13 +23,21 @@
   register: credentials
 - debug: var=credentials
 - pause:
-    seconds: 5
+    seconds: 1
 - name: Add user to group 
   ldap_attr:
     dn: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
     name: member
     values: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
     state: present
+    server_uri: ldaps://activedirectory.pocquebec.org
+    bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    bind_pw: '{{ ldap_password }}'
+    validate_certs: no
+- name: Set user password 
+  ldap_passwd:
+    dn: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
+    passwd: "{{ password }}"
     server_uri: ldaps://activedirectory.pocquebec.org
     bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
     bind_pw: '{{ ldap_password }}'
