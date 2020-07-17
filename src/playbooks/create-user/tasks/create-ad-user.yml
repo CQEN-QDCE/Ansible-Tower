@@ -18,10 +18,9 @@
       logonCount: 0
       mail: martin.st-pierre3@sct.gouv.qc.ca
       memberOf: CN=AWS Delegated Administrators,OU=AWS Delegated Groups,DC=activedirectory,DC=pocquebec,DC=org
-      objectClass: top; person; organizationalPerson; user
       sAMAccountName: stpm03
-      sAMAccountType: 805306368 = ( NORMAL_USER_ACCOUNT )
-      userAccountControl: 0x200 = ( NORMAL_ACCOUNT );
+      sAMAccountType: 805306368
+      userAccountControl: 0x200
       userPrincipalName: stpm03@activedirectory.pocquebec.org
     state: present
     server_uri: ldaps://activedirectory.pocquebec.org
