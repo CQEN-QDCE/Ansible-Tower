@@ -1,20 +1,20 @@
 ---  
 - name: Create Active Directory user 
   ldap_entry: 
-    dn: CN=Martin St-Pierre 3,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    dn: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
     objectClass:
       - top
       - person
       - organizationalPerson
       - user
     attributes:
-      sn: St-Pierre3
-      displayName: Martin St-Pierre 3
-      distinguishedName: CN=Martin St-Pierre 3,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
-      givenName: Martin
+      sn: '{{ last_name }}'
+      displayName: '{{ first_name }} {{ last_name }}'
+      distinguishedName: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
+      givenName: '{{ first_name }}'
       mail: martin.st-pierre3@sct.gouv.qc.ca
-      sAMAccountName: stpm03
-      userPrincipalName: stpm03@activedirectory.pocquebec.org
+      sAMAccountName: '{{ username }}'
+      userPrincipalName: '{{ username }}@activedirectory.pocquebec.org'
     state: present
     server_uri: ldaps://activedirectory.pocquebec.org
     bind_dn: CN=Ansible Tower,OU=Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
@@ -33,4 +33,4 @@
     bind_pw: '{{ ldap_password }}'
     validate_certs: no
   with_dict:
-    member: CN=Martin St-Pierre 3,OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org
+    member: 'CN={{ first_name }} {{ last_name }},OU=Lab Users,OU=activedirectory,DC=activedirectory,DC=pocquebec,DC=org'
