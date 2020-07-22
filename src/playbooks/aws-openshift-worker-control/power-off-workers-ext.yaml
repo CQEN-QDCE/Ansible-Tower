@@ -1,0 +1,39 @@
+---
+- name: "Turn off workers node that don't have the 'noshutdown' tag set to yes."
+  gather_facts: no
+  hosts: localhost
+  tasks:
+    - name: "Get all instances"
+      ec2_instance_facts:
+        region: "{{ region }}"
+      register: all_instances
+
+    - name: "Get instances with a tag noshutdown=yes"
+      ec2_instance_facts:
+        region: "{{ region }}"
+        filters:
+          "tag:noshutdown": "yes"
+      register: noshutdown_instances
+
+    - name: "Extract the list of all instance ID"
+      set_fact:
+        all_instance_ids: "{{ all_instances.instances | map(attribute='instance_id') | list }}"
+
+    - name: "Extract the list of noshutdown instance ID"
+      set_fact:
+        noshutdown_instance_ids: "{{ noshutdown_instances.instances | map(attribute='instance_id') | list }}"
+
+    - name: "Extract the list of noshutdown instance ID"
+      set_fact:
+        instance_ids: "{{ all_instance_ids | difference(noshutdown_instance_ids) | list }}"
+
+    - debug:
+        msg:
+          - "The following instances will be closed: "
+          - "{{ instance_ids }}"
+
+#    - name: "Turn off instances"
+#      ec2:
+#        region: "{{ region }}"
+#        instance_ids: "{{ instance_ids }}"
+#        state: stopped
