@@ -1,26 +1,39 @@
 ---
-- name: "Start workers node that have the 'shutdown' tag set to yes."
+- name: "Turn on workers node that have the 'bootup' tag set to yes."
   gather_facts: no
   hosts: localhost
   tasks:
-    - name: "Get instances with a tag shutdown=yes"
+    - name: "Get all instances"
+      ec2_instance_facts:
+        region: "{{ region }}"
+      register: all_instances
+
+    - name: "Get instances with a tag bootup=yes"
       ec2_instance_facts:
         region: "{{ region }}"
         filters:
-          "tag:shutdown": "yes"
-      register: instances
+          "tag:bootup": "yes"
+      register: bootup_instances
 
-    - name: "Extract the list of instance ID"
+    - name: "Extract the list of all instance ID"
       set_fact:
-        instance_ids: "{{ instances.instances | map(attribute='instance_id') | list }}"
+        all_instance_ids: "{{ all_instances.instances | map(attribute='instance_id') | list }}"
+
+    - name: "Extract the list of bootup instance ID"
+      set_fact:
+        bootup_instance_ids: "{{ bootup_instances.instances | map(attribute='instance_id') | list }}"
+
+    - name: "Extract the list of bootup instance ID"
+      set_fact:
+        instance_ids: "{{ all_instance_ids | difference(bootup_instance_ids) | list }}"
 
     - debug:
         msg:
-          - "The following instances will be started: "
+          - "The following instances will be opened: "
           - "{{ instance_ids }}"
 
-    - name: "Starting instances"
-      ec2:
-        region: "{{ region }}"
-        instance_ids: "{{ instance_ids }}"
-        state: running
+#    - name: "Turn on instances"
+#      ec2:
+#        region: "{{ region }}"
+#        instance_ids: "{{ instance_ids }}"
+#        state: running
