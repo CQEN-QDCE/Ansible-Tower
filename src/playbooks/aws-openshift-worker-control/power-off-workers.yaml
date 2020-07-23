@@ -23,7 +23,7 @@
       set_fact:
         noshutdown_instance_ids: "{{ noshutdown_instances.instances | map(attribute='instance_id') | list }}"
 
-    - name: "Extract the list of noshutdown instance ID"
+    - name: "Extract the list of instance ID"
       set_fact:
         instance_ids: "{{ all_instance_ids | difference(noshutdown_instance_ids) | list }}"
 
@@ -32,8 +32,8 @@
           - "The following instances will be closed: "
           - "{{ instance_ids }}"
 
-#    - name: "Turn off instances"
-#      ec2:
-#        region: "{{ region }}"
-#        instance_ids: "{{ instance_ids }}"
-#        state: stopped
+    - name: "Turn off instances"
+      ec2:
+        region: "{{ region }}"
+        instance_ids: "{{ instance_ids }}"
+        state: stopped

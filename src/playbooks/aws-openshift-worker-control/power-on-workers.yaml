@@ -15,7 +15,7 @@
           "tag:bootup": "yes"
       register: bootup_instances
 
-    - name: "Extract the list of bootup instance ID"
+    - name: "Extract the list of instance ID"
       set_fact:
         instance_ids: "{{ bootup_instances.instances | map(attribute='instance_id') | list }}"
 
@@ -24,8 +24,8 @@
           - "The following instances will be opened: "
           - "{{ instance_ids }}"
 
-#    - name: "Turn on instances"
-#      ec2:
-#        region: "{{ region }}"
-#        instance_ids: "{{ instance_ids }}"
-#        state: running
+    - name: "Turn on instances"
+      ec2:
+        region: "{{ region }}"
+        instance_ids: "{{ instance_ids }}"
+        state: running
