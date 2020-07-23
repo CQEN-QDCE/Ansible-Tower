@@ -15,17 +15,9 @@
           "tag:bootup": "yes"
       register: bootup_instances
 
-    - name: "Extract the list of all instance ID"
-      set_fact:
-        all_instance_ids: "{{ all_instances.instances | map(attribute='instance_id') | list }}"
-
     - name: "Extract the list of bootup instance ID"
       set_fact:
-        bootup_instance_ids: "{{ bootup_instances.instances | map(attribute='instance_id') | list }}"
-
-    - name: "Extract the list of bootup instance ID"
-      set_fact:
-        instance_ids: "{{ all_instance_ids | difference(bootup_instance_ids) | list }}"
+        instance_ids: "{{ bootup_instances.instances | map(attribute='instance_id') | list }}"
 
     - debug:
         msg:
